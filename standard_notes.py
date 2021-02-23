@@ -16,9 +16,11 @@ def get_tags(dictionary):
             if dictionary[key]["content_type"] == "Tag"]
     return tags
 
+
 def get_uuids_from_tag(dictionary, tag):
     """Get uuids from tag."""
     return dictionary[tag]
+
 
 def get_notes_from_uuids(dictionary, uuid_list):
     """Get notes from UUIDs."""
@@ -35,6 +37,7 @@ def get_notes_from_uuids(dictionary, uuid_list):
                 continue
     return notes
 
+
 def write_notes_to_files(notes, tag):
     """Write notes to files."""
     # create directory
@@ -43,12 +46,13 @@ def write_notes_to_files(notes, tag):
         os.makedirs(path)
     # create files
     for note in notes:
-        title = note[0].replace(" / "," ")
+        title = note[0].replace(" / ", " ")
         with open(path+"/"+title+".md", "w+") as file:
             file.write("# "+note[0])
             file.write("\n\n")
             file.write(note[1])
             file.write("\n\n")
+
 
 def pipe():
     """Pipe all functions."""
@@ -77,6 +81,7 @@ def pipe():
     notes = get_notes_from_uuids(df_dict, uuid_list)
 
     write_notes_to_files(notes, tag)
+
 
 if __name__ == "__main__":
     pipe()
